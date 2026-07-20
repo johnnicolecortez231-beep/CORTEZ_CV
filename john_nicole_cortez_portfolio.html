@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Nicole R. Cortez | Interactive Portfolio</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --accent-light: rgba(59, 130, 246, 0.15);
+            --border-color: #334155;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-light: rgba(37, 99, 235, 0.1);
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        [data-theme="light"] nav {
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-btns {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle, .btn-download {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--accent-light);
+        }
+
+        .btn-download {
+            background-color: var(--accent);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-download:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 6rem 1.5rem 3rem 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            min-height: 70vh;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .badge-status {
+            background-color: var(--accent-light);
+            color: var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge-status .pulse {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .hero-contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--bg-card);
+            transition: border-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Section Layout */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-header h2 i {
+            color: var(--accent);
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Interactive Filter Tabs */
+        .filter-container {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background-color: var(--accent-light);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        .card-body {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .card-body ul {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .card-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Skills Styling */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-group {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .skill-group h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skill-tag {
+            background-color: var(--accent-light);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: transform 0.2s;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+
+        /* Interactive Cover Letter Accordion */
+        .accordion {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 1.5rem;
+        }
+
+        .accordion-header {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            background-color: var(--bg-card);
+            transition: background 0.2s;
+        }
+
+        .accordion-header:hover {
+            background-color: var(--accent-light);
+        }
+
+        .accordion-content {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .accordion-content.open {
+            padding: 1.5rem;
+            max-height: 800px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Contact Section */
+        .contact-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            padding: 1.25rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .contact-item a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Printable CV Styling */
+        @media print {
+            nav, .theme-toggle, .btn-download, .cta-btns, .filter-container, .accordion-header i, footer {
+                display: none !important;
+            }
+
+            body {
+                background-color: white !important;
+                color: black !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+
+            section {
+                padding: 1rem 0 !important;
+                border-bottom: 1px solid #ddd !important;
+                page-break-inside: avoid;
+            }
+
+            .card, .skill-group, .accordion {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+                padding: 0.5rem 0 !important;
+            }
+
+            .accordion-content {
+                max-height: none !important;
+                padding: 0 !important;
+                display: block !important;
+            }
+
+            .card-title, .hero h1, h2 {
+                color: black !important;
+            }
+
+            .badge-status, .skill-tag, .card-date {
+                background: #eee !important;
+                color: black !important;
+                border: 1px solid #ccc !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-code"></i> John Nicole Cortez
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-btns">
+            <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                <i class="fa-solid fa-sun" id="themeIcon"></i>
+            </button>
+            <button class="btn-download" onclick="window.print()" title="Print or Save CV as PDF">
+                <i class="fa-solid fa-file-arrow-down"></i> Save / Print CV
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- Hero / Header Section -->
+        <section id="about" class="hero">
+            <div class="badge-status">
+                <span class="pulse"></span> Available for OJT / Internship
+            </div>
+            <h1>John Nicole R. Cortez</h1>
+            <h2>BSIT Major in Computer Technology Student</h2>
+            <p>
+                A passionate 4th-year student at Southern Luzon State University with hands-on technical skills in Computer Systems Servicing (NC II), Hardware & Digital Payment Integration, Troubleshooting, Networking, and Web Development.
+            </p>
+
+            <div class="hero-contact-info">
+                <span><i class="fa-solid fa-location-dot"></i> Brgy. Caridad, Quezon, Quezon</span>
+                <span><i class="fa-solid fa-phone"></i> 09629201522</span>
+                <span><i class="fa-solid fa-envelope"></i> <a href="mailto:johnnicolecortez231@gmail.com">johnnicolecortez231@gmail.com</a></span>
+                <span><i class="fa-brands fa-facebook"></i> <a href="https://facebook.com" target="_blank">John Nicole Cortez</a></span>
+            </div>
+
+            <div class="cta-btns">
+                <a href="#projects" class="btn-primary"><i class="fa-solid fa-laptop-code"></i> View Projects</a>
+                <a href="#cover-letter" class="btn-secondary"><i class="fa-solid fa-envelope-open-text"></i> View Application Letter</a>
+                <button class="btn-secondary" onclick="window.print()"><i class="fa-solid fa-print"></i> Download / Print CV</button>
+            </div>
+        </section>
+
+        <!-- Cover Letter Section (Accordion) -->
+        <section id="cover-letter">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-file-lines"></i> Application / Cover Letter</h2>
+                <p>Click below to expand and read my formal letter for On-the-Job Training.</p>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion()">
+                    <span><i class="fa-solid fa-paper-plane" style="color: var(--accent); margin-right: 0.5rem;"></i> Letter of Intent for On-the-Job Training (OJT)</span>
+                    <i class="fa-solid fa-chevron-down" id="accordionIcon"></i>
+                </div>
+                <div class="accordion-content" id="accordionContent">
+                    <p><strong>Date:</strong> July 15, 2026</p><br>
+                    <p><strong>To:</strong> Hiring Manager</p><br>
+                    <p>Dear Hiring Manager,</p><br>
+                    <p>I am writing to express my interest in applying for an On-the-Job Training (OJT) position at your company. I am currently a fourth-year Bachelor of Science in Industrial Technology major in Computer Technology student at Southern Luzon State University, and I am required to complete my internship as part of our academic program.</p><br>
+                    <p>Throughout my studies, I have developed a solid foundation in computer technology, web development, computer troubleshooting, and basic networking. I have also worked on academic projects, including the development of a <strong>Rice Vending Machine with Digital Payment System</strong> and a <strong>Professional Camera Web Application</strong>, which strengthened my technical, analytical, and problem-solving skills.</p><br>
+                    <p>In addition to my technical knowledge, I currently serve as the <strong>President of the Association of Computer Technology Students (ACTS)</strong>, where I have gained valuable leadership, communication, and organizational skills through coordinating activities, managing projects, and collaborating with students and faculty members.</p><br>
+                    <p>I am eager to learn from experienced professionals, contribute to your organization, and further develop my skills in a real-world working environment. I am a fast learner, adaptable, responsible, and committed to performing my duties with professionalism and integrity.</p><br>
+                    <p>Thank you for considering my application. I would welcome the opportunity to discuss how I can contribute to your organization during my internship.</p><br>
+                    <p>Sincerely,<br><strong>JOHN NICOLE R. CORTEZ</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-gears"></i> Technical & Professional Skills</h2>
+                <p>Core competencies, software tools, and technical capabilities.</p>
+            </div>
+
+            <div class="skills-container">
+                <div class="skill-group">
+                    <h3><i class="fa-solid fa-code"></i> Web & Software</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
+                        <span class="skill-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+                        <span class="skill-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
+                        <span class="skill-tag"><i class="fa-solid fa-desktop"></i> Basic Web Development</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3><i class="fa-solid fa-network-wired"></i> Hardware & Systems</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag"><i class="fa-solid fa-screwdriver-wrench"></i> Computer Troubleshooting</span>
+                        <span class="skill-tag"><i class="fa-solid fa-server"></i> Computer Systems Servicing (NC II)</span>
+                        <span class="skill-tag"><i class="fa-solid fa-diagram-project"></i> Basic Networking</span>
+                        <span class="skill-tag"><i class="fa-solid fa-microchip"></i> Hardware Integration</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3><i class="fa-solid fa-toolbox"></i> Productivity & Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag"><i class="fa-solid fa-file-excel"></i> Microsoft Office Suite</span>
+                        <span class="skill-tag"><i class="fa-brands fa-google"></i> Google Workspace</span>
+                        <span class="skill-tag"><i class="fa-solid fa-palette"></i> Canva</span>
+                        <span class="skill-tag"><i class="fa-solid fa-users"></i> Project Management</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-diagram-project"></i> Academic Projects</h2>
+                <p>Hands-on hardware and software projects completed during academic coursework.</p>
+            </div>
+
+            <div class="filter-container">
+                <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
+                <button class="filter-btn" onclick="filterProjects('hardware')">Hardware & IoT</button>
+                <button class="filter-btn" onclick="filterProjects('web')">Web Applications</button>
+            </div>
+
+            <div class="grid">
+                <!-- Project 1 -->
+                <div class="card project-item" data-category="hardware">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Rice Vending Machine Prototype</div>
+                            <div class="card-subtitle">Hardware & Digital Payment Integration</div>
+                        </div>
+                        <span class="card-date">2025 - 2026</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Developed a smart rice vending machine prototype featuring automated dispensing mechanisms and integrated digital payment protocols.</p>
+                        <ul>
+                            <li>Assisted in hardware assembly and controller integration.</li>
+                            <li>Executed system testing, hardware troubleshooting, and bug fixes.</li>
+                            <li>Prepared comprehensive technical documentation and system architecture details.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="card project-item" data-category="web">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Professional Camera Web Application</div>
+                            <div class="card-subtitle">Web System & Design</div>
+                        </div>
+                        <span class="card-date">Academic Project</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Designed and developed an academic web application interface for photography enthusiasts and camera control/showcase functionality.</p>
+                        <ul>
+                            <li>Built responsive front-end user interfaces using HTML, CSS, and JS.</li>
+                            <li>Optimized user experience and interactive layout components.</li>
+                            <li>Tested cross-browser functionality and feature workflow.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Leadership Section -->
+        <section id="experience">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-user-tie"></i> Leadership & Experience</h2>
+                <p>Extracurricular leadership, student governance, and administrative responsibilities.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">President</div>
+                        <div class="card-subtitle">Association of Computer Technology Students (ACTS)</div>
+                    </div>
+                    <span class="card-date">Southern Luzon State University</span>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Led and coordinated organization activities, executive meetings, and student initiatives.</li>
+                        <li>Managed communication channels between student officers, department members, and university faculty.</li>
+                        <li>Organized academic workshops, tech seminars, and student engagement events.</li>
+                        <li>Prepared official announcements, activity reports, proposals, and administrative documentation.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications & Training Section -->
+        <section id="certifications">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-certificate"></i> Certifications & Seminars</h2>
+                <p>National credentials, technical seminars, and career development workshops.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><i class="fa-solid fa-award" style="color: #eab308;"></i> National Certification</div>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>NC II - Computer Systems Servicing (CSS)</strong></p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">TESDA certification demonstrating competence in assembling, installing, configuring, and maintaining computer systems and networks.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><i class="fa-solid fa-chalkboard-user" style="color: var(--accent);"></i> Seminars & Trainings</div>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Cybersecurity Awareness Seminar</strong> - Best practices in digital security & threat mitigation</li>
+                            <li><strong>TechVolution Unleashed</strong> - Emerging technology trends & industry applications</li>
+                            <li><strong>Advanced Excel: Unveiling Tech Insights</strong> - Data analysis & reporting tools</li>
+                            <li><strong>Kickstart 2025: A Glimpse at Your Future Career in Tech</strong> - Professional tech industry preparation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="contact-card">
+                <h2>Get In Touch</h2>
+                <p style="color: var(--text-secondary); max-width: 500px; margin: 0.5rem auto 1.5rem auto;">
+                    I am actively seeking an On-the-Job Training / Internship opportunity in Computer Technology, System Administration, or Web Development. Feel free to reach out!
+                </p>
+
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Email</span>
+                        <a href="mailto:johnnicolecortez231@gmail.com">johnnicolecortez231@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Phone</span>
+                        <a href="tel:09629201522">09629201522</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-brands fa-facebook"></i>
+                        <span>Facebook</span>
+                        <a href="https://facebook.com" target="_blank">John Nicole Cortez</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Location</span>
+                        <span style="font-weight: 600;">Brgy. Caridad, Quezon</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 John Nicole R. Cortez | BSIT Computer Technology | All Rights Reserved.</p>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Theme Toggle Functionality
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fa-solid fa-moon';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fa-solid fa-sun';
+            }
+        });
+
+        // Interactive Accordion for Cover Letter
+        function toggleAccordion() {
+            const content = document.getElementById('accordionContent');
+            const icon = document.getElementById('accordionIcon');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.className = 'fa-solid fa-chevron-down';
+            } else {
+                content.classList.add('open');
+                icon.className = 'fa-solid fa-chevron-up';
+            }
+        }
+
+        // Project Interactive Filter
+        function filterProjects(category) {
+            const items = document.querySelectorAll('.project-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
